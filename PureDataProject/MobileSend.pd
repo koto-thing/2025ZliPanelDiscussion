@@ -1,0 +1,14 @@
+#N canvas -4 1 704 423 12;
+#X obj 285 114 oscformat /audio;
+#X obj 285 171 list prepend send;
+#X obj 285 220 list trim;
+#X obj 285 281 netsend -u -b;
+#X msg 468 216 disconnect, f 11;
+#X floatatom 285 67 5 0 0 0 - - - 0;
+#X msg 455 173 connect localhost 8888;
+#X connect 0 0 1 0;
+#X connect 1 0 2 0;
+#X connect 2 0 3 0;
+#X connect 4 0 3 0;
+#X connect 5 0 0 0;
+#X connect 6 0 3 0;
