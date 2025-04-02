@@ -1,0 +1,17 @@
+#N canvas 794 132 1106 776 12;
+#X obj 85 164 adc~;
+#X obj 85 234 tabwrite~ \$0-pocket;
+#X obj 21 190 bng 19 250 50 0 empty empty empty 0 -10 0 12 #fcfcfc #000000 #000000;
+#X obj 85 300 tabplay~ \$0-pocket;
+#X obj 86 362 dac~;
+#X obj 21 266 bng 19 250 50 0 empty empty empty 0 -10 0 12 #fcfcfc #000000 #000000;
+#X text 233 234 ここでマイク入力を記録, f 19;
+#X text 235 301 ここで記録したデータを再生, f 22;
+#X obj 18 14 loadbang;
+#X msg 18 76 \; pd dsp 1;
+#X connect 0 0 1 0;
+#X connect 2 0 1 0;
+#X connect 3 0 4 0;
+#X connect 3 1 4 1;
+#X connect 5 0 3 0;
+#X connect 8 0 9 0;
