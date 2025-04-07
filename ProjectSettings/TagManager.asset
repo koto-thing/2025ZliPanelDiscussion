@@ -44,8 +44,11 @@ TagManager:
   - name: Background
     uniqueID: 2187499447
     locked: 0
-  - name: Layer1
+  - name: MainScreen
     uniqueID: 2763541225
+    locked: 0
+  - name: PanelOverlay
+    uniqueID: 3155726833
     locked: 0
   m_RenderingLayers:
   - Default

@@ -12,7 +12,14 @@ namespace Title
     
         protected override void Configure(IContainerBuilder builder)
         {
-        
+            // model
+            builder.Register<TitleButtonsModel>(Lifetime.Singleton);
+            
+            // Presenter
+            builder.RegisterEntryPoint<TitleButtonsPresenter>();
+            
+            // View
+            builder.RegisterComponent(view);
         }
     }
 }

@@ -38,13 +38,31 @@ namespace Title
             view.CreditButton.onClick
                 .AddListener(() =>
                 {
-                    model.CreditButtonFunc();
+                    view.ShowHideCreditPanel();
                 });
             
             view.QuitButton.onClick
                 .AddListener(() =>
                 {
+                    view.ShowHideQuitPanel();
+                });
+            
+            view.CreditCloseButton.onClick
+                .AddListener(() =>
+                {
+                    view.ShowHideCreditPanel();
+                });
+            
+            view.QuitAcceptButton.onClick
+                .AddListener(() =>
+                {
                     model.QuitButtonFunc();
+                });
+            
+            view.QuitCloseButton.onClick
+                .AddListener(() =>
+                {
+                    view.ShowHideQuitPanel();
                 });
         }
 

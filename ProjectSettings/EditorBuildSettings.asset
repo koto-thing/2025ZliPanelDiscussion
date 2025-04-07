@@ -6,8 +6,17 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Zli2025/Scenes/SplashScreen.unity
+    guid: 9569f440f5492024b90215c1faef59e8
+  - enabled: 1
+    path: Assets/Zli2025/Scenes/Title.unity
+    guid: 5ba7e51f2b9de2847ae4d4c353196b05
+  - enabled: 1
     path: Assets/Zli2025/Scenes/FMODSample.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Zli2025/Scenes/OSCSample.unity
+    guid: eccacf547f72d6a41ad8c816be704908
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
