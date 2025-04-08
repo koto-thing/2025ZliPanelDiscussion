@@ -16,7 +16,8 @@
 #X floatatom 22 297 5 0 0 0 - - - 0;
 #X obj 22 69 env~;
 #X obj 22 253 *;
-#X obj 22 161 > 40;
+#X obj 22 161 > 0;
+#X text 109 163 ←マイクの感度とともに調整すべし, f 26;
 #X connect 0 0 1 0;
 #X connect 1 0 2 0;
 #X connect 3 0 2 0;

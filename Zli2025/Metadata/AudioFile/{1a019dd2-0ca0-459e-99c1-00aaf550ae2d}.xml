@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{1a019dd2-0ca0-459e-99c1-00aaf550ae2d}">
+		<property name="assetPath">
+			<value>cartoon-jump-6462.mp3</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>24</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>1.776</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{7518bf3c-81cf-40a3-9da2-629c78c014e4}</destination>
+		</relationship>
+	</object>
+</objects>

@@ -11,13 +11,15 @@ namespace OSCSample
         private PlayerView view;
         private MobileOSCModel oscModel;
         private OSCSampleStateModel stateModel;
+        private AudioControllerModel audioContModel;
 
-        public PlayerPresenter(PlayerModel model, PlayerView view, MobileOSCModel oscModel, OSCSampleStateModel stateModel)
+        public PlayerPresenter(PlayerModel model, PlayerView view, MobileOSCModel oscModel, OSCSampleStateModel stateModel, AudioControllerModel audioContModel)
         {
             this.model = model;
             this.view = view;
             this.oscModel = oscModel;
             this.stateModel = stateModel;
+            this.audioContModel = audioContModel;
             
             SetEvent();
         }
@@ -29,12 +31,18 @@ namespace OSCSample
 
         public void Tick()
         {
-            if (stateModel.State == OSCSampleState.GAMEPLAY)
+            if (stateModel.State == OSCSampleState.ANIMATION)
             {
                 if (Input.GetKeyUp(KeyCode.Space))
                 {
-                    model.ChangeJumpAvailable(true);   
+                    model.ChangeJumpAvailable(true);  
+                    audioContModel.ClickFeedbackSE.Play();
                 }
+                
+                if(!model.IsJumpAvailable)
+                    view.ShowOrHideJumpReadyText(true);
+                
+                audioContModel.SetLowPassContParam(view.PlayerObject.transform.position.y);
             }
         }
 
@@ -45,7 +53,9 @@ namespace OSCSample
                 .Subscribe(_ =>
                 {
                     model.Jump(oscModel.MaxDB);
-                    view.Jump(model.PlayerYPos);
+                    view.ShowOrHideJumpReadyText(false);
+                    view.Jump(model.PlayerYPos, () => stateModel.State = OSCSampleState.GAMEOVER, () => audioContModel.TwinkleSE.Play());
+                    audioContModel.JumpSE.Play();
                 });
         }
 

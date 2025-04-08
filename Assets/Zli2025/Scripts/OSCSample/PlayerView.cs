@@ -1,4 +1,7 @@
-﻿using DG.Tweening;
+﻿using System;
+using DG.Tweening;
+using TMPro;
+using UnityEditor;
 using UnityEngine;
 
 namespace OSCSample
@@ -6,13 +9,23 @@ namespace OSCSample
     public class PlayerView : MonoBehaviour
     {
         [SerializeField] private GameObject playerObject;
+        [SerializeField] private TextMeshProUGUI jumpReadyText;
         
         public GameObject PlayerObject { get => playerObject; set => playerObject = value; }
 
+        public void ShowOrHideJumpReadyText(bool isShow)
+        {
+            if (isShow)
+                jumpReadyText.gameObject.SetActive(true);
+            else
+                jumpReadyText.gameObject.SetActive(false);
+        }
+        
         // @brief プレイヤーを上方向に飛ばす
-        public void Jump(float playerYPos)
+        public void Jump(float playerYPos, Action onComplete, Action audioCallback)
         {
             float moveTime = 0f;
+            bool isLimitAltitude = false;
             var sequence = DOTween.Sequence();
             
             if (playerYPos < 1000f && playerYPos >= 0f)
@@ -28,11 +41,29 @@ namespace OSCSample
             else if(playerYPos < 6000f && playerYPos >= 5000f)
                 moveTime = 3.0f;
             else if (playerYPos >= 6000f)
-                moveTime = 4.0f;
+            {
+                moveTime = 1.0f;
+                isLimitAltitude = true;
+            }
 
-            sequence
-                .Append(playerObject.transform.DOLocalMoveY(playerYPos, moveTime))
-                .Append(playerObject.transform.DOLocalMoveY(0, moveTime));
+            if (isLimitAltitude)
+            {
+                sequence
+                    .Append(playerObject.transform.DOLocalMoveY(5000f, moveTime).SetEase(Ease.OutQuart))
+                    .Append(playerObject.transform.DOScale(new Vector3(0, 0, 0), 3.0f))
+                    .OnComplete(() =>
+                    {
+                        audioCallback?.Invoke();
+                        onComplete?.Invoke();
+                    });
+            }
+            else
+            {
+                sequence
+                    .Append(playerObject.transform.DOLocalMoveY(playerYPos, moveTime).SetEase(Ease.OutQuart))
+                    .Append(playerObject.transform.DOLocalMoveY(0, moveTime).SetEase(Ease.InQuart))
+                    .OnComplete(() => onComplete?.Invoke());
+            }
         }
     }
 }

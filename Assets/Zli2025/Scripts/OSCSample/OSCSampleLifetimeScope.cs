@@ -10,21 +10,27 @@ namespace OSCSample
         [SerializeField] private MobileOSCModel mobileOscModel;
         [SerializeField] private MobileOSCView mobileOscView;
         [SerializeField] private PlayerView playerView;
+        [SerializeField] private ResultView resultView;
+        [SerializeField] private AudioControllerModel audioControllerModel;
         
         protected override void Configure(IContainerBuilder builder)
         {
             // Model
             builder.Register<OSCSampleStateModel>(Lifetime.Singleton);
-            builder.RegisterComponent(mobileOscModel);
             builder.Register<PlayerModel>(Lifetime.Singleton);
+            builder.Register<ResultModel>(Lifetime.Singleton);
             
-            // Presenter
+            // エントリポイント
             builder.RegisterEntryPoint<MobileOSCPresenter>();
             builder.RegisterEntryPoint<PlayerPresenter>();
+            builder.RegisterEntryPoint<ResultPresenter>();
             
-            // View
+            // MonoBehaviourを継承してるやつ
             builder.RegisterComponent(mobileOscView);
             builder.RegisterComponent(playerView);
+            builder.RegisterComponent(resultView);
+            builder.RegisterComponent(audioControllerModel);
+            builder.RegisterComponent(mobileOscModel);
         }
     }
 }

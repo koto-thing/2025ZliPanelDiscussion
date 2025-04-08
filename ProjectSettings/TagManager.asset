@@ -50,6 +50,9 @@ TagManager:
   - name: PanelOverlay
     uniqueID: 3155726833
     locked: 0
+  - name: UI
+    uniqueID: 2711364803
+    locked: 0
   m_RenderingLayers:
   - Default
   - Light Layer 1

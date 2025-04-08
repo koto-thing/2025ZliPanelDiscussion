@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{61c7e88c-a4bb-4c87-a821-123364a7801e}">
+		<property name="name">
+			<value>VolContParam</value>
+		</property>
+		<relationship name="folder">
+			<destination>{31f6f383-00f7-410c-bebe-5302d536952e}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{2ff21282-9419-430c-a2ca-e0193cc63a31}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{2ff21282-9419-430c-a2ca-e0193cc63a31}">
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+		<property name="seekSpeed">
+			<value>0.19999998807907104</value>
+		</property>
+	</object>
+</objects>

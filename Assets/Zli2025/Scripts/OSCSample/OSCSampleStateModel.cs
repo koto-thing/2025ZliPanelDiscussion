@@ -2,7 +2,7 @@
 {
     public class OSCSampleStateModel
     {
-        private OSCSampleState state;
+        private OSCSampleState state = OSCSampleState.WAITFORSTART;
         
         public OSCSampleState State { get => state; set => state = value; }
     }
@@ -10,8 +10,9 @@
     public enum OSCSampleState
     {
         TUTORIAL,
+        WAITFORSTART,
         RECORDING,
-        GAMEPLAY,
+        ANIMATION,
         GAMEOVER
     }
 }

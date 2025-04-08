@@ -9,6 +9,7 @@ namespace OSCSample
 
         private float playerYPos;
 
+        public bool IsJumpAvailable => onJumpAvailable.Value;
         public Observable<bool> OnJumpAvailable => onJumpAvailable.AsObservable();
         
         public float PlayerYPos { get => playerYPos; set => playerYPos = value; }
@@ -21,7 +22,7 @@ namespace OSCSample
 
         public void Jump(float micVolume)
         {
-            float newPlayerYPos = micVolume + 100 * Random.Range(0, 500);
+            float newPlayerYPos = micVolume * 70 + Random.Range(0, 800);
             playerYPos = Mathf.Clamp(newPlayerYPos, 0, 6000);
         }
     }

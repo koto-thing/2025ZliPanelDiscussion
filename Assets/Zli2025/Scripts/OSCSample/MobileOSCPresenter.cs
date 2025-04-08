@@ -11,9 +11,11 @@ namespace OSCSample
         private MobileOSCModel model;
         private MobileOSCView view;
         private OSCSampleStateModel stateModel;
+        private AudioControllerModel audioContModel;
     
-        public MobileOSCPresenter(MobileOSCModel model, MobileOSCView view, OSCSampleStateModel stateModel)
+        public MobileOSCPresenter(MobileOSCModel model, MobileOSCView view, OSCSampleStateModel stateModel, AudioControllerModel audioContModel)
         {
+            this.audioContModel = audioContModel;
             this.model = model;
             this.view = view;
             this.stateModel = stateModel;
@@ -23,15 +25,38 @@ namespace OSCSample
 
         public void Initialize()
         {
-            stateModel.State = OSCSampleState.RECORDING;
-            model.OscReceiver.Bind("/audio", ReceivedAudioData);
+            model.SetLocalHostIPAddress();
+            model.OscReceiver.Bind("/audio", model.ReceivedAudioData);
+            view.ShowOrHideStartDescText(true);
+            view.ShowOrHideYouText(true);
+            view.ShowOrHideTimerText(false);
+            view.ShowOrHideVolumeText(true);
+            view.ShowOrHideVolumeSlider(true);
         }
     
         public void Tick()
         {
-            if (model.ReceivedAudioData.Count > 0 && stateModel.State == OSCSampleState.RECORDING)
+            // スペースキーを押して録音開始
+            if (stateModel.State == OSCSampleState.WAITFORSTART)
             {
-                foreach(var data in model.ReceivedAudioData)
+                if (Input.GetKeyUp(KeyCode.Space))
+                {
+                    stateModel.State = OSCSampleState.RECORDING;
+                    view.ShowOrHideStartDescText(false);
+                    view.ShowOrHideYouText(false);
+                    view.ShowOrHideTimerText(true);
+                    view.ShowOrHideVolumeText(true);
+                    view.ShowOrHideVolumeSlider(true);
+                    audioContModel.SetVolContParam(0.4f);
+                    audioContModel.ClickFeedbackSE.Play();
+                    audioContModel.ChargeSE.Play();
+                }
+            }
+            
+            // 10秒間録音する
+            if (model.ReceivedAudioDataList.Count > 0 && stateModel.State == OSCSampleState.RECORDING)
+            {
+                foreach(var data in model.ReceivedAudioDataList)
                 {
                     if(data > model.MaxDB)
                     {
@@ -39,28 +64,36 @@ namespace OSCSample
                     }
                 }
                 
-                Debug.Log(stateModel.State);
                 model.CheckRecordingTime();
+                view.UpdateTimerText(model.Timer);
                 model.Timer += Time.deltaTime;
             }
         }
         
         private void SetEvent()
         {
+            // 録音完了時の処理
             model.OnReceiveComplete
                 .Skip(1)
                 .Subscribe(_ =>
                 {
-                    stateModel.State = OSCSampleState.GAMEPLAY;
+                    view.ShowOrHideTimerText(false);
+                    view.ShowOrHideVolumeText(false);
+                    view.ShowOrHideVolumeSlider(false);
+                    stateModel.State = OSCSampleState.ANIMATION;
+                    audioContModel.SetVolContParam(0f);
+                    audioContModel.ChargeSE.Stop();
+                });
+            
+            // スライダーの値を更新する
+            model.CurrentRecievedData
+                .Skip(1)
+                .Subscribe(data =>
+                {
+                    view.UpdateSliderValue(data);
                 });
         }
-
-        private void ReceivedAudioData(OSCMessage message)
-        {
-            float sample = message.Values[0].FloatValue;
-            model.ReceivedAudioData.Add(sample);
-        }
-
+        
         public void Dispose()
         {
             

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using SplashScreen;
+using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
@@ -13,9 +14,11 @@ namespace Zli2025.Scripts.SplashScreen
         {
             // Model
             builder.Register<SplashScreenModel>(Lifetime.Singleton);
+            builder.Register<PdPatchOpenerModel>(Lifetime.Singleton);
             
             // Presenter
             builder.RegisterEntryPoint<SplashScreenPresenter>();
+            builder.RegisterEntryPoint<PdPatchOpenerPresenter>();
             
             // View
             builder.RegisterComponent(view);
