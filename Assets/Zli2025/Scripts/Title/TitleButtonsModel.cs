@@ -1,4 +1,5 @@
 ﻿using UnityEngine.SceneManagement;
+using UnityEngine;
 
 namespace Title
 {
@@ -18,7 +19,7 @@ namespace Title
         {
             #if UNITY_EDITOR
                 UnityEditor.EditorApplication.isPlaying = false;
-            #elif UNITY_STANDALONE
+            #else
                 Application.Quit();
             #endif
         }
