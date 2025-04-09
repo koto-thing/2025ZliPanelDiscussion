@@ -9,6 +9,8 @@ namespace OSCSample
     public class PlayerView : MonoBehaviour
     {
         [SerializeField] private GameObject playerObject;
+        [SerializeField] private GameObject playerSprite;
+        [SerializeField] private GameObject starSprite;
         [SerializeField] private TextMeshProUGUI jumpReadyText;
         
         public GameObject PlayerObject { get => playerObject; set => playerObject = value; }
@@ -51,11 +53,15 @@ namespace OSCSample
                 sequence
                     .Append(playerObject.transform.DOLocalMoveY(5000f, moveTime).SetEase(Ease.OutQuart))
                     .Append(playerObject.transform.DOScale(new Vector3(0, 0, 0), 3.0f))
-                    .OnComplete(() =>
+                    .AppendCallback(() =>
                     {
-                        audioCallback?.Invoke();
-                        onComplete?.Invoke();
-                    });
+                        playerSprite.SetActive(false);
+                        playerObject.transform.localScale = new Vector3(1, 1, 1);
+                    })
+                    .AppendCallback(() => audioCallback?.Invoke())
+                    .Append(starSprite.transform.DOScale(new Vector3(0.5f, 0.5f, 0.5f), 1.0f))
+                    .Append(starSprite.transform.DOScale(new Vector3(0, 0, 0), 1.0f))
+                    .OnComplete(() => onComplete?.Invoke());
             }
             else
             {

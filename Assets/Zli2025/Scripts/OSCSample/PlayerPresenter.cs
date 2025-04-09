@@ -10,14 +10,16 @@ namespace OSCSample
         private PlayerModel model;
         private PlayerView view;
         private MobileOSCModel oscModel;
+        private EffectContModel effectContModel;
         private OSCSampleStateModel stateModel;
         private AudioControllerModel audioContModel;
 
-        public PlayerPresenter(PlayerModel model, PlayerView view, MobileOSCModel oscModel, OSCSampleStateModel stateModel, AudioControllerModel audioContModel)
+        public PlayerPresenter(PlayerModel model, PlayerView view, EffectContModel effectContModel, MobileOSCModel oscModel, OSCSampleStateModel stateModel, AudioControllerModel audioContModel)
         {
             this.model = model;
             this.view = view;
             this.oscModel = oscModel;
+            this.effectContModel = effectContModel;
             this.stateModel = stateModel;
             this.audioContModel = audioContModel;
             
@@ -36,7 +38,9 @@ namespace OSCSample
                 if (Input.GetKeyUp(KeyCode.Space))
                 {
                     model.ChangeJumpAvailable(true);  
+                    effectContModel.IsPlayExplodeEffectValue = true;
                     audioContModel.ClickFeedbackSE.Play();
+                    audioContModel.ExplodeEffectSE.Play();
                 }
                 
                 if(!model.IsJumpAvailable)

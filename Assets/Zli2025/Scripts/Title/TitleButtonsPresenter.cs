@@ -35,22 +35,34 @@ namespace Title
                     model.StartButtonFunc();
                 });
             
+            view.OptionButton.onClick
+                .AddListener(() =>
+                {
+                    view.ShowOrHideOptionPanel();
+                });
+            
             view.CreditButton.onClick
                 .AddListener(() =>
                 {
-                    view.ShowHideCreditPanel();
+                    view.ShowOrHideCreditPanel();
                 });
             
             view.QuitButton.onClick
                 .AddListener(() =>
                 {
-                    view.ShowHideQuitPanel();
+                    view.ShowOrHideQuitPanel();
+                });
+            
+            view.OptionCloseButton.onClick
+                .AddListener(() =>
+                {
+                    view.ShowOrHideOptionPanel();
                 });
             
             view.CreditCloseButton.onClick
                 .AddListener(() =>
                 {
-                    view.ShowHideCreditPanel();
+                    view.ShowOrHideCreditPanel();
                 });
             
             view.QuitAcceptButton.onClick
@@ -62,7 +74,7 @@ namespace Title
             view.QuitCloseButton.onClick
                 .AddListener(() =>
                 {
-                    view.ShowHideQuitPanel();
+                    view.ShowOrHideQuitPanel();
                 });
         }
 

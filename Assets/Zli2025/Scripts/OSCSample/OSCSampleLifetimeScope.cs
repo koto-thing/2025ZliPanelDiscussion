@@ -7,6 +7,7 @@ namespace OSCSample
     public class OSCSampleLifetimeScope : LifetimeScope
     {
         [Header("依存関係")] 
+        [SerializeField] private EffectContView effectContView;
         [SerializeField] private MobileOSCModel mobileOscModel;
         [SerializeField] private MobileOSCView mobileOscView;
         [SerializeField] private PlayerView playerView;
@@ -16,16 +17,19 @@ namespace OSCSample
         protected override void Configure(IContainerBuilder builder)
         {
             // Model
+            builder.Register<EffectContModel>(Lifetime.Singleton);
             builder.Register<OSCSampleStateModel>(Lifetime.Singleton);
             builder.Register<PlayerModel>(Lifetime.Singleton);
             builder.Register<ResultModel>(Lifetime.Singleton);
             
             // エントリポイント
+            builder.RegisterEntryPoint<EffectContPresenter>();
             builder.RegisterEntryPoint<MobileOSCPresenter>();
             builder.RegisterEntryPoint<PlayerPresenter>();
             builder.RegisterEntryPoint<ResultPresenter>();
             
             // MonoBehaviourを継承してるやつ
+            builder.RegisterComponent(effectContView);
             builder.RegisterComponent(mobileOscView);
             builder.RegisterComponent(playerView);
             builder.RegisterComponent(resultView);

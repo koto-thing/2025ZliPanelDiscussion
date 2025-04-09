@@ -10,6 +10,11 @@ namespace Title
             SceneManager.LoadSceneAsync("OSCSample");
         }
 
+        public void OptionButtonFunc()
+        {
+            
+        }
+
         public void CreditButtonFunc()
         {
             

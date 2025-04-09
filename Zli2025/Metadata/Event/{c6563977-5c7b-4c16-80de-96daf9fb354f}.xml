@@ -46,6 +46,9 @@
 		</relationship>
 	</object>
 	<object class="MixerInput" id="{ee0f83f0-45f7-48f9-9a72-6e3a1484cac5}">
+		<relationship name="masters">
+			<destination>{f31d476d-cdf8-4462-a552-cc8e3a323274}</destination>
+		</relationship>
 		<relationship name="effectChain">
 			<destination>{ac0aa1b9-c371-483a-883b-e6f1e0eb3946}</destination>
 		</relationship>
@@ -113,6 +116,7 @@
 	<object class="MixerBusEffectChain" id="{165d53e4-ab12-4694-89fe-2e6f61ce8d6a}">
 		<relationship name="effects">
 			<destination>{91ea90a9-bc6a-406f-a968-d7acc40dee56}</destination>
+			<destination>{6c617417-a850-49ef-a09f-56c6bb324561}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{d79341ac-528d-4526-9813-75f5902acd52}" />
@@ -124,5 +128,6 @@
 	</object>
 	<object class="MixerBusPanner" id="{7588f092-ce58-425c-afe8-56ebc5c88ee9}" />
 	<object class="MixerBusFader" id="{91ea90a9-bc6a-406f-a968-d7acc40dee56}" />
+	<object class="DelayEffect" id="{6c617417-a850-49ef-a09f-56c6bb324561}" />
 	<object class="MixerBusFader" id="{3a74f737-00fa-4c5f-8154-2298869cbe03}" />
 </objects>

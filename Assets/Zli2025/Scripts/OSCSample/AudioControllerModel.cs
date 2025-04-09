@@ -13,6 +13,7 @@ namespace OSCSample
         [SerializeField] private StudioEventEmitter jumpSE;
         [SerializeField] private StudioEventEmitter chargeSE;
         [SerializeField] private StudioEventEmitter twinkleSE;
+        [SerializeField] private StudioEventEmitter explodeEffectSE;
         
         public StudioEventEmitter BGM { get => bgm; set => bgm = value; }
         
@@ -20,6 +21,7 @@ namespace OSCSample
         public StudioEventEmitter JumpSE          { get => jumpSE; set => jumpSE = value; }
         public StudioEventEmitter ChargeSE        { get => chargeSE; set => chargeSE = value; }
         public StudioEventEmitter TwinkleSE       { get => twinkleSE; set => twinkleSE = value; }
+        public StudioEventEmitter ExplodeEffectSE { get => explodeEffectSE; set => explodeEffectSE = value; }
 
         // @brief BGMの音量を変更する
         // @param value 音量の値
